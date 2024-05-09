@@ -25,7 +25,9 @@ export function resolveIconsPath(path: string): ResolvedIconPath | null {
   if (!isIconPath(path))
     return null
 
-  path = path.replace(iconPathRE, '')
+  path = path
+    .replace(iconPathRE, '')
+    .replace(/\.[a-zA-Z][a-zA-Z0-9]*$/, '') // remove extension
 
   const query: ResolvedIconPath['query'] = {}
   const queryIndex = path.indexOf('?')
@@ -40,9 +42,6 @@ export function resolveIconsPath(path: string): ResolvedIconPath | null {
         query[key] = value
     })
   }
-
-  // remove extension
-  path = path.replace(/\.\w+$/, '')
 
   const [collection, icon] = path.split('/')
 
