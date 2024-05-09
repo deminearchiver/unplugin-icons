@@ -27,7 +27,7 @@ export function resolveIconsPath(path: string): ResolvedIconPath | null {
 
   path = path
     .replace(iconPathRE, '')
-    .replace(/\.[a-zA-Z][a-zA-Z0-9]*$/, '') // remove extension
+    .replace(/(\.[a-zA-Z]+)*$/g, '') // remove extension
 
   const query: ResolvedIconPath['query'] = {}
   const queryIndex = path.indexOf('?')
